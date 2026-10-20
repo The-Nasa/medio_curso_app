@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: `project_setup` tiene spec lista y espera aprobación humana.
+Estado: implementando `project_setup`.
 
-Siguiente paso: revisar `specs/project_setup/` y aprobar o solicitar cambios. No escribir código hasta aprobar.
+Plan: ejecutar T1–T11 de `specs/project_setup/tasks.md` en orden.
