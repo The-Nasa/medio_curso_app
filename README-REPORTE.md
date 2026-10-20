@@ -17,7 +17,7 @@ Preparar un repositorio para desarrollar una plataforma de reservas en Python co
 
 La persona encargada del despliegue debe leer `deployment/README.md` e `infra/terraform/README.md`. La estructura incluye ejemplos de backend remoto, variables por entorno, Docker y `.env.example`, pero no contiene secretos ni ejecuta recursos cloud automáticamente.
 
-Para desarrollo local, PostgreSQL se ejecutará con:
+Para desarrollo local, PostgreSQL se ejecutará con el puerto local `5433` para evitar conflictos con instalaciones existentes:
 
 ```bash
 docker compose up -d postgres

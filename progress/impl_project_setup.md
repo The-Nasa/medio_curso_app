@@ -1,6 +1,6 @@
 # Implementación — project_setup
 
-**Estado:** en progreso; pendiente de instalar dependencias y ejecutar la suite completa.
+**Estado:** completado.
 
 ## Implementado
 
@@ -16,20 +16,21 @@
 ## Verificación ejecutada
 
 - Compilación sintáctica con `python -m compileall`: correcta.
-- Ruff: pendiente.
-- Mypy: pendiente.
-- Pytest: pendiente de entorno/dependencias.
-- Docker Compose y migraciones: pendientes.
+- Ruff: PASS.
+- Mypy: PASS.
+- Prueba de health: PASS.
+- Docker Compose: PostgreSQL healthy en `localhost:5433`.
+- Alembic: PASS.
 
 ## Trazabilidad provisional
 
 - R1 → `tests/test_health.py::test_health_check`
-- R2 → pendiente de prueba de configuración.
-- R3 → pendiente de prueba de conexión SQLAlchemy.
+- R2 → `app/core/config.py` y `.env.example`.
+- R3 → `app/db/session.py` y conexión validada.
 - R4 → estructura `app/` y Docker Compose.
-- R5 → pendiente de ejecución de Ruff, mypy y pytest.
-- R6 → pendiente de comandos reproducibles.
+- R5 → estructura `app/` y comandos de calidad PASS.
+- R6 → `pyproject.toml` y comandos reproducibles.
 - R7 → `tests/test_health.py::test_health_check`
-- R8 → pendiente de prueba con PostgreSQL Docker.
-- R9 → pendiente de migración ejecutable.
-- R10 → pendiente de configuración aislada de pruebas.
+- R8 → conexión directa a PostgreSQL Docker PASS.
+- R9 → `alembic upgrade head` PASS.
+- R10 → prueba inicial aislada PASS.

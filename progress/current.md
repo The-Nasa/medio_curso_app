@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: implementando `project_setup`.
+Estado: `project_setup` completado y aprobado por reviewer.
 
-Plan: ejecutar T1–T11 de `specs/project_setup/tasks.md` en orden.
+Siguiente paso: tomar la primera feature pendiente (`auth`) y generar su spec.

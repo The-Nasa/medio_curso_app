@@ -39,6 +39,8 @@ select = ["E", "F", "I", "B", "UP"]
 python_version = "3.12"
 strict = true
 plugins = []
+# FastAPI registra endpoints mediante decoradores cuyo tipado depende del framework.
+disallow_untyped_decorators = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

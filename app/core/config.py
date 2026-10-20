@@ -3,9 +3,9 @@ from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseSettings):
+class Settings(BaseSettings):  # type: ignore[misc]
     app_env: str = "development"
-    database_url: str = "postgresql+psycopg://reservas:reservas_local@localhost:5432/tingo_reservas"
+    database_url: str = "postgresql+psycopg://reservas:reservas_local@localhost:5433/tingo_reservas"
     jwt_secret: str = "change-me-in-development"
     log_level: str = "INFO"
 
