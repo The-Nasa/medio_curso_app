@@ -20,3 +20,12 @@ CUANDO una persona ejecute las herramientas de calidad documentadas, Ruff, mypy 
 
 ## R7
 CUANDO se ejecute la suite inicial, el sistema DEBE verificar que la aplicación puede iniciar y responder al health check.
+
+## R8
+CUANDO una persona ejecute `docker compose up -d postgres`, el sistema DEBE permitir que la aplicación se conecte usando la `DATABASE_URL` del entorno local.
+
+## R9
+CUANDO se prepare la base de datos, el sistema DEBE aplicar cambios de esquema mediante migraciones versionadas de Alembic y NO mediante creación manual de tablas.
+
+## R10
+CUANDO se ejecuten las pruebas, el sistema DEBE usar una configuración de prueba aislada y NO debe modificar datos de desarrollo o producción.

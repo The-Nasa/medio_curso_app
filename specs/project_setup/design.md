@@ -22,6 +22,9 @@ pyproject.toml
 - Pydantic Settings leerá la configuración desde el entorno.
 - SQLAlchemy 2 será la capa de persistencia.
 - PostgreSQL local se ejecutará con `docker-compose.yml`, usando un volumen y health check.
+- Alembic gestionará las migraciones de esquema y se ejecutará explícitamente antes de probar el flujo de persistencia.
+- El health check devolverá el estado de la aplicación y no expondrá secretos ni detalles internos.
+- Las pruebas usarán una base de datos aislada o transacciones reversibles.
 - La prueba inicial usará una aplicación de prueba y no datos reales.
 - Ruff y mypy se configurarán en `pyproject.toml`.
 
