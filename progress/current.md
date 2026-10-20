@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: spec de `reservations` creada; espera revisión humana de Persona 1.
+Estado: `reservations` completado y aprobado por reviewer.
 
-Siguiente paso: revisar `specs/reservations/` y aprobar o solicitar cambios antes de programar.
+Siguiente paso: generar la spec de `integration`.
