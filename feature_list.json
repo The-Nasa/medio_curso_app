@@ -62,7 +62,7 @@
     {
       "id": 3,
       "name": "reservations",
-      "owner": "persona-2",
+      "owner": "persona-1",
       "title": "Crear y cancelar reservas",
       "description": "Permitir que un cliente consulte disponibilidad, reserve y cancele una cita.",
       "acceptance": [
@@ -75,7 +75,7 @@
         "Existen pruebas unitarias y de integración."
       ],
       "sdd": true,
-      "status": "pending"
+      "status": "spec_ready"
     },
     {
       "id": 4,

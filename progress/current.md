@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: feature `availability` completada y aprobada (`done`).
+Estado: spec de `reservations` creada; espera revisión humana de Persona 1.
 
-Siguiente paso: la siguiente feature es `reservations` (id: 3, owner: persona-2). El `leader` debe pasarla a `spec_author` para generar sus specs.
+Siguiente paso: revisar `specs/reservations/` y aprobar o solicitar cambios antes de programar.
