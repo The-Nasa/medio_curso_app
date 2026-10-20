@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: `project_setup` completado y aprobado por reviewer.
+Estado: spec de `auth` creada; espera revisión humana de Persona 1.
 
-Siguiente paso: tomar la primera feature pendiente (`auth`) y generar su spec.
+Siguiente paso: aprobar o solicitar cambios en `specs/auth/` antes de programar.
