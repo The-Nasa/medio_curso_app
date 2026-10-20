@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: spec de `auth` creada; espera revisión humana de Persona 1.
+Estado: `auth` completado y aprobado por reviewer.
 
-Siguiente paso: aprobar o solicitar cambios en `specs/auth/` antes de programar.
+Siguiente paso: generar la spec de `availability` para la Persona 2.
