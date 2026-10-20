@@ -17,6 +17,12 @@ Preparar un repositorio para desarrollar una plataforma de reservas en Python co
 
 La persona encargada del despliegue debe leer `deployment/README.md` e `infra/terraform/README.md`. La estructura incluye ejemplos de backend remoto, variables por entorno, Docker y `.env.example`, pero no contiene secretos ni ejecuta recursos cloud automáticamente.
 
+Para desarrollo local, PostgreSQL se ejecutará con:
+
+```bash
+docker compose up -d postgres
+```
+
 ## Próximo paso
 
 El `leader` debe tomar la primera feature `pending` de `feature_list.json` y lanzar al `spec_author`. Este crea los tres archivos de spec a partir de `description` y `acceptance`. Luego cambia la feature a `spec_ready` y espera la aprobación humana. Todavía no hay specs generadas ni código de aplicación.

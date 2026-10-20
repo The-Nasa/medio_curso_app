@@ -21,6 +21,7 @@ pyproject.toml
 - FastAPI será el punto de entrada HTTP.
 - Pydantic Settings leerá la configuración desde el entorno.
 - SQLAlchemy 2 será la capa de persistencia.
+- PostgreSQL local se ejecutará con `docker-compose.yml`, usando un volumen y health check.
 - La prueba inicial usará una aplicación de prueba y no datos reales.
 - Ruff y mypy se configurarán en `pyproject.toml`.
 
