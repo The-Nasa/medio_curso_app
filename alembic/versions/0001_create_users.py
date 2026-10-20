@@ -3,6 +3,7 @@
 Revision ID: 0001_create_users
 Revises:
 """
+
 import sqlalchemy as sa
 
 from alembic import op
