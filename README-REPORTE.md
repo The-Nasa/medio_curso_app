@@ -15,7 +15,7 @@ Preparar un repositorio para desarrollar una plataforma de reservas en Python co
 
 ## Despliegue
 
-La persona encargada del despliegue debe leer `deployment/README.md` e `infra/terraform/README.md`. La estructura incluye ejemplos de backend remoto, variables por entorno, Docker y `.env.example`, pero no contiene secretos ni ejecuta recursos cloud automáticamente.
+La persona encargada del despliegue debe leer `deployment/README.md` y revisar `.github/workflows/`. El despliegue se automatiza con GitHub Actions, Docker y secrets del repositorio; no contiene secretos reales.
 
 Para desarrollo local, PostgreSQL se ejecutará con el puerto local `5433` para evitar conflictos con instalaciones existentes:
 

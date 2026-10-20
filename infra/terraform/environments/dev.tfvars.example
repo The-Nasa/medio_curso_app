@@ -1,4 +1,0 @@
-environment = "dev"
-region      = "REEMPLAZAR"
-
-# Nunca agregar aquí contraseñas, tokens ni claves privadas.

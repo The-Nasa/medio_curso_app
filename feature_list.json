@@ -104,12 +104,12 @@
       "acceptance": [
         "La aplicación usa variables de entorno y no guarda secretos en el repositorio.",
         "Existe un Dockerfile reproducible para la API.",
-        "Existe infraestructura como código en Terraform.",
-        "Terraform tiene variables separadas para desarrollo y producción.",
+        "Existe un workflow de GitHub Actions para ejecutar pruebas y validaciones.",
+        "Existe un workflow de GitHub Actions para construir la imagen Docker.",
         "Existe configuración documentada para PostgreSQL de producción.",
         "Las migraciones de Alembic se ejecutan antes de iniciar la aplicación.",
         "Existe un endpoint de health check.",
-        "El despliegue ejecuta las pruebas antes de publicar.",
+        "El workflow de despliegue ejecuta las pruebas antes de publicar.",
         "La URL desplegada responde correctamente al health check.",
         "Existe documentación para rollback y revisión de logs."
       ],

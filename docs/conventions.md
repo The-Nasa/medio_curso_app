@@ -10,6 +10,6 @@
 - No mezclar lógica HTTP con reglas de negocio.
 - Escribir pruebas deterministas, aisladas y legibles.
 - No usar `print()` para depuración permanente.
-- Los recursos de infraestructura se definen en Terraform y se revisan mediante `terraform plan`.
-- No guardar `.tfvars` con secretos; usar variables de entorno o el gestor de secretos del proveedor cloud.
-- No ejecutar `terraform apply` desde una rama sin revisión.
+- Los workflows de despliegue viven en `.github/workflows/`.
+- No guardar secretos en workflows; usar GitHub Actions Secrets.
+- El despliegue se ejecuta solo después de que CI pase y la rama esté revisada.

@@ -8,7 +8,7 @@
 - Autenticación: JWT y `pwdlib`/Argon2.
 - Pruebas: pytest, pytest-cov y httpx.
 - Calidad: Ruff, mypy y pre-commit.
-- Infraestructura: Terraform.
+- Automatización: GitHub Actions.
 
 ## Capas
 

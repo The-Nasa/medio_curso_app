@@ -11,7 +11,7 @@ feature_list.json      → funcionalidades, responsables y estados
 specs/<feature>/       → requirements, design y tasks
 progress/              → estado e informes de trabajo
 docs/                  → arquitectura y convenciones
-infra/terraform/       → contexto del despliegue
+.github/workflows/     → CI y despliegue con GitHub Actions
 ```
 
 ## Flujo obligatorio
@@ -102,7 +102,7 @@ Responsabilidades:
 - Persona 1: `auth`.
 - Persona 2: `availability` y `reservations`.
 - Ambos: `project_setup` e `integration`.
-- Deployer: `deployment` con Docker y Terraform.
+- Deployer: `deployment` con Docker y GitHub Actions.
 
 ## Verificación
 
@@ -118,14 +118,4 @@ python -m pytest -q --cov=app --cov-fail-under=80
 
 ## Despliegue
 
-El despliegue se realiza únicamente después de revisar el código y aprobar la spec de `deployment`.
-
-```bash
-terraform fmt -check
-terraform init
-terraform validate
-terraform plan
-terraform apply
-```
-
-`terraform apply` requiere aprobación humana. Nunca se guardan secretos en Git.
+El despliegue se realiza únicamente después de revisar el código y aprobar la spec de `deployment`, mediante `.github/workflows/deploy.yml`. Los secretos viven en GitHub Actions Secrets y nunca se guardan en Git.

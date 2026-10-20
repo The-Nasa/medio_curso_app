@@ -1,4 +1,0 @@
-environment = "prod"
-region      = "REEMPLAZAR"
-
-# Los secretos deben venir del gestor de secretos del proveedor cloud.
