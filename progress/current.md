@@ -1,5 +1,5 @@
 # Sesión actual
 
-Estado: `auth` completado y aprobado por reviewer.
+Estado: spec de `availability` creada; espera revisión humana de Persona 2.
 
-Siguiente paso: generar la spec de `availability` para la Persona 2.
+Siguiente paso: Persona 2 debe aprobar o solicitar cambios en `specs/availability/`.

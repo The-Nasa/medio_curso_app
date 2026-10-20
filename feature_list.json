@@ -57,7 +57,7 @@
         "Existen pruebas unitarias y de integración."
       ],
       "sdd": true,
-      "status": "pending"
+      "status": "spec_ready"
     },
     {
       "id": 3,
