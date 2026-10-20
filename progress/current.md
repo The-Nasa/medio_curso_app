@@ -1,5 +1,7 @@
 # Sesión actual
 
-Estado: `reservations` completado y aprobado por reviewer.
+Estado: spec de `integration` lista para revisión humana.
 
-Siguiente paso: generar la spec de `integration`.
+Archivos creados: `specs/integration/requirements.md`, `design.md` y `tasks.md`.
+
+No se ha escrito código de integración.
