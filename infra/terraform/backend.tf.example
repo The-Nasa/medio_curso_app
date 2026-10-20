@@ -1,0 +1,12 @@
+# Copiar como backend.tf solo después de elegir el proveedor y crear el backend remoto.
+# No usar un estado local en producción.
+
+# terraform {
+#   backend "s3" {
+#     bucket         = "REEMPLAZAR"
+#     key            = "tingo-reservas/terraform.tfstate"
+#     region         = "REEMPLAZAR"
+#     dynamodb_table = "REEMPLAZAR"
+#     encrypt        = true
+#   }
+# }

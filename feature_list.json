@@ -1,0 +1,120 @@
+{
+  "project": "tingo-reservas",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_approved_spec_to_implement": true,
+    "require_tests_to_close": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"]
+  },
+  "features": [
+    {
+      "id": 0,
+      "name": "project_setup",
+      "owner": "ambos",
+      "title": "Configuración inicial del proyecto",
+      "description": "Preparar la API Python, la configuración, la base de datos y la estructura de pruebas.",
+      "acceptance": [
+        "El proyecto ejecuta una API mínima con FastAPI.",
+        "La configuración se carga mediante variables de entorno.",
+        "La aplicación puede conectarse a PostgreSQL mediante SQLAlchemy.",
+        "Existe una estructura separada para api, services, repositories, models y schemas.",
+        "Existen comandos documentados para Ruff, mypy y pytest.",
+        "Existe una prueba mínima que verifica que la aplicación inicia."
+      ],
+      "sdd": true,
+      "status": "spec_ready"
+    },
+    {
+      "id": 1,
+      "name": "auth",
+      "owner": "persona-1",
+      "title": "Registro e inicio de sesión",
+      "description": "Permitir que clientes y administradores creen una cuenta e inicien sesión.",
+      "acceptance": [
+        "Un usuario puede registrarse con nombre, correo y contraseña.",
+        "El sistema rechaza correos duplicados.",
+        "Las contraseñas se almacenan usando hash seguro.",
+        "Un usuario válido puede iniciar sesión y recibe un token JWT.",
+        "Las credenciales inválidas son rechazadas.",
+        "Existen pruebas unitarias y de integración."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "name": "availability",
+      "owner": "persona-2",
+      "title": "Gestión de horarios disponibles",
+      "description": "Permitir que un administrador cree, consulte y desactive horarios para reservas.",
+      "acceptance": [
+        "Solo un administrador autenticado puede crear horarios.",
+        "Un horario tiene fecha, hora de inicio, hora de fin y estado.",
+        "El sistema rechaza horarios con fecha pasada.",
+        "El sistema rechaza horarios superpuestos.",
+        "Los clientes pueden consultar únicamente horarios activos y disponibles.",
+        "Un administrador puede desactivar un horario sin borrar el historial.",
+        "Existen pruebas unitarias y de integración."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "reservations",
+      "owner": "persona-2",
+      "title": "Crear y cancelar reservas",
+      "description": "Permitir que un cliente consulte disponibilidad, reserve y cancele una cita.",
+      "acceptance": [
+        "Un cliente autenticado puede consultar horarios disponibles.",
+        "Un cliente puede crear una reserva disponible.",
+        "El sistema rechaza horarios ocupados.",
+        "El sistema rechaza fechas pasadas.",
+        "Un cliente puede consultar únicamente sus reservas.",
+        "Un cliente puede cancelar una reserva propia.",
+        "Existen pruebas unitarias y de integración."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "name": "integration",
+      "owner": "ambos",
+      "title": "Integración y entrega del sistema",
+      "description": "Integrar autenticación, horarios y reservas, y preparar la ejecución del sistema.",
+      "acceptance": [
+        "Un cliente autenticado puede consultar horarios y crear una reserva.",
+        "Un cliente no puede acceder a funciones de administrador.",
+        "Una reserva ocupa el horario correspondiente.",
+        "La cancelación libera el horario según las reglas definidas.",
+        "Las pruebas de integración cubren el flujo completo.",
+        "Ruff, mypy y pytest terminan correctamente.",
+        "La documentación explica cómo ejecutar y configurar el proyecto."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "name": "deployment",
+      "owner": "ambos",
+      "title": "Despliegue de la plataforma",
+      "description": "Preparar, configurar y verificar el despliegue de la API Python y la base de datos.",
+      "acceptance": [
+        "La aplicación usa variables de entorno y no guarda secretos en el repositorio.",
+        "Existe un Dockerfile reproducible para la API.",
+        "Existe infraestructura como código en Terraform.",
+        "Terraform tiene variables separadas para desarrollo y producción.",
+        "Existe configuración documentada para PostgreSQL de producción.",
+        "Las migraciones de Alembic se ejecutan antes de iniciar la aplicación.",
+        "Existe un endpoint de health check.",
+        "El despliegue ejecuta las pruebas antes de publicar.",
+        "La URL desplegada responde correctamente al health check.",
+        "Existe documentación para rollback y revisión de logs."
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
+}
