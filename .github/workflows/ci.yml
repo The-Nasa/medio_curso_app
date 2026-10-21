@@ -15,12 +15,14 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install -e ".[dev]"
-      - name: Ruff
+      - name: Ruff Lint
         run: python -m ruff check .
+      - name: Ruff Format Check
+        run: python -m ruff format --check .
       - name: Mypy
         run: python -m mypy app --no-incremental --follow-imports=skip
       - name: Tests
-        run: python -m pytest -q
+        run: python -m pytest -q --cov=app
 
   docker:
     needs: validate

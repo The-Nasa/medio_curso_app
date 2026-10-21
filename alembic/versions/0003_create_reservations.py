@@ -3,6 +3,7 @@
 Revision ID: 0003_create_reservations
 Revises: 0002_create_availability
 """
+
 import sqlalchemy as sa
 
 from alembic import op

@@ -1,27 +1,104 @@
 name: Deploy
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Install dependencies
         run: python -m pip install -e ".[dev]"
-      - name: Validate before deploy
+
+      - name: Validate before deploy (Tests & Quality Checks)
         run: |
           python -m ruff check .
+          python -m ruff format --check .
           python -m mypy app --no-incremental --follow-imports=skip
           python -m pytest -q
-      - name: Build image
+
+      - name: Build Docker image (Verification)
         run: docker build -f Dockerfile -t tingo-reservas:${{ github.sha }} .
-      - name: Deployment configuration required
-        run: echo "Configure the cloud provider command and GitHub Actions Secrets before publishing."
+
+      - name: Deploy to EC2 via SSH
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          if [ -z "$EC2_HOST" ] || [ -z "$EC2_USER" ] || [ -z "$EC2_SSH_KEY" ]; then
+            echo "::error::Faltan secrets requeridos en el repositorio (EC2_HOST, EC2_USER o EC2_SSH_KEY)."
+            exit 1
+          fi
+
+          mkdir -p ~/.ssh
+          echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          ssh -o StrictHostKeyChecking=no "$EC2_USER@$EC2_HOST" << 'EOF'
+            set -e
+            echo "==> Conectado a la instancia EC2"
+
+            APP_DIR="$HOME/medio_curso_app"
+            if [ ! -d "$APP_DIR" ]; then
+              echo "==> Clonando repositorio en $APP_DIR..."
+              git clone https://github.com/The-Nasa/medio_curso_app.git "$APP_DIR"
+            fi
+
+            cd "$APP_DIR"
+            echo "==> Actualizando código desde origin/main..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Construyendo imagen Docker en el host..."
+            docker build -t tingo-reservas:latest .
+
+            echo "==> Deteniendo contenedor previo (si existe)..."
+            docker stop tingo-reservas 2>/dev/null || true
+            docker rm tingo-reservas 2>/dev/null || true
+
+            echo "==> Desplegando contenedor con migraciones y health check..."
+            # Si existe archivo .env en el host se inyecta, de lo contrario se usan variables del entorno
+            if [ -f "$APP_DIR/.env" ]; then
+              docker run -d \
+                --name tingo-reservas \
+                --restart unless-stopped \
+                -p 8000:8000 \
+                --env-file "$APP_DIR/.env" \
+                tingo-reservas:latest
+            else
+              docker run -d \
+                --name tingo-reservas \
+                --restart unless-stopped \
+                -p 8000:8000 \
+                -e APP_ENV=production \
+                tingo-reservas:latest
+            fi
+
+            echo "==> Esperando inicialización del servicio..."
+            sleep 7
+
+            echo "==> Verificando health check local..."
+            HEALTH_OUTPUT=$(curl -s http://localhost:8000/health)
+            echo "Respuesta health check: $HEALTH_OUTPUT"
+
+            if echo "$HEALTH_OUTPUT" | grep -q '"status":"ok"'; then
+              echo "==> [OK] Despliegue verificado exitosamente."
+            else
+              echo "==> [ERROR] Health check no respondió con status ok."
+              docker logs --tail 50 tingo-reservas
+              exit 1
+            fi
+          EOF

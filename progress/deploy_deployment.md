@@ -1,0 +1,28 @@
+# Informe de despliegue — deployment
+
+- **Versión de la aplicación:** `0.1.0`
+- **Responsable:** Persona 2 (Deployer)
+- **Workflows preparados y verificados:**
+  - `.github/workflows/ci.yml`: Validación estática (Ruff lint y format), verificación de tipos con Mypy, suite de pruebas automatizadas con Pytest (cobertura >80%) y construcción de imagen Docker.
+  - `.github/workflows/deploy.yml`: Validación estricta previa, construcción de imagen y despliegue automatizado hacia AWS EC2 mediante SSH.
+- **Gestión de credenciales y secretos:**
+  - Variables de entorno no sensibles documentadas en `.env.example`.
+  - Secretos de conexión remota configurados en GitHub Actions Repository Secrets:
+    - `EC2_HOST`
+    - `EC2_USER`
+    - `EC2_SSH_KEY`
+  - Ningún secreto ni credencial expuesto en el repositorio.
+- **Mecanismo de base de datos:**
+  - Alembic ejecuta `alembic upgrade head` automáticamente en el contenedor a través de `entrypoint.sh` antes de exponer el servicio.
+- **Endpoint de verificación (Health Check):**
+  - `GET /health` responde `{"status": "ok"}` con código HTTP 200.
+  - Verificado mediante pruebas automatizadas en `tests/test_health.py` y comprobación en el pipeline.
+- **Resultado de pruebas locales y estáticas:**
+  - Ruff: PASS
+  - Ruff format: PASS (90 archivos verificados)
+  - Mypy: PASS (30 archivos sin errores)
+  - Pytest: PASS (29/29 pruebas exitosas, 86.2% de cobertura)
+- **Procedimiento de Rollback:**
+  - Reversión por Git (`git revert`) y re-despliegue continuo.
+  - Rollback manual en servidor mediante Docker tag anterior o `alembic downgrade -1`.
+  - Documentado en detalle en `docs/deployment.md`.
