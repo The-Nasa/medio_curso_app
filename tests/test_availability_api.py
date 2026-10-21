@@ -16,9 +16,7 @@ from app.services.availability_service import (
     list_available_slots,
 )
 
-engine = create_engine(
-    "sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool
-)
+engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
 Base.metadata.create_all(engine)
 
 
