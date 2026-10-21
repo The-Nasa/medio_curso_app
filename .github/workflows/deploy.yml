@@ -70,7 +70,6 @@ jobs:
             docker rm tingo-reservas 2>/dev/null || true
 
             echo "==> Desplegando contenedor con migraciones y health check..."
-            # Si existe archivo .env en el host se inyecta, de lo contrario se usan variables del entorno
             if [ -f "$APP_DIR/.env" ]; then
               docker run -d \
                 --name tingo-reservas \
@@ -88,13 +87,28 @@ jobs:
             fi
 
             echo "==> Esperando inicialización del servicio..."
-            sleep 7
+            sleep 4
 
-            echo "==> Verificando health check local..."
-            HEALTH_OUTPUT=$(curl -s http://localhost:8000/health)
-            echo "Respuesta health check: $HEALTH_OUTPUT"
+            echo "==> Estado del contenedor tingo-reservas:"
+            docker ps -a --filter name=tingo-reservas
 
-            if echo "$HEALTH_OUTPUT" | grep -q '"status":"ok"'; then
+            echo "==> Logs del contenedor:"
+            docker logs --tail 30 tingo-reservas
+
+            echo "==> Verificando health check local con reintentos..."
+            HEALTH_OK=false
+            for i in $(seq 1 10); do
+              HEALTH_OUTPUT=$(curl -s http://127.0.0.1:8000/health || true)
+              if echo "$HEALTH_OUTPUT" | grep -q '"status":"ok"'; then
+                echo "Respuesta health check ($i/10): $HEALTH_OUTPUT"
+                HEALTH_OK=true
+                break
+              fi
+              echo "Intento $i/10: esperando que la API responda..."
+              sleep 2
+            done
+
+            if [ "$HEALTH_OK" = true ]; then
               echo "==> [OK] Despliegue verificado exitosamente."
             else
               echo "==> [ERROR] Health check no respondió con status ok."
