@@ -18,3 +18,18 @@ leader → spec_author → spec_ready → aprobación humana
 ```
 
 Las definiciones de roles para Codex están en `agents/`. `AGENTS.md` es el punto de entrada del agente principal.
+
+## Revisión de pull requests con CodeGuardian
+
+CodeGuardian Technical revisa los PR internos hacia la rama principal.
+Ruff analiza los archivos Python modificados y pytest ejecuta la suite
+con las dependencias de desarrollo del proyecto. El informe JSON se
+descarga en Actions como codeguardian-review.
+
+El motor está fijado a un commit de The-Nasa/codeguardian-ai. El check
+lee codeguardian.yml del commit base. Si la rama base aún no incluye una
+política, usa la política Standard incluida en el motor fijado. pytest es
+obligatorio y los hallazgos de Ruff se reportan como advertencias.
+
+Abre un PR interno con un cambio Python pequeño para verificar la
+instalación. Revisa el check y su informe antes de exigirlo para fusionar.

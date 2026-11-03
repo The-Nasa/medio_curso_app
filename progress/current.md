@@ -15,3 +15,9 @@ Todas las features del proyecto han sido completadas y aprobadas:
 - Endpoint y pruebas de health check (`/health`).
 - Documentación operativa en `docs/deployment.md`.
 - Veredicto de revisión: APPROVED en `progress/review_deployment.md`.
+
+## Piloto de CodeGuardian
+
+Preparado el check técnico con el motor fijado a un commit. La revisión
+local sobre una copia temporal devolvió PASS. Falta verificar la
+ejecución de GitHub Actions y el artefacto en el PR de instalación.
